@@ -1,7 +1,9 @@
 'use strict';
 
 $('li').on('click', function(){
-  $(this).fadeOut(750)
+  $(this).fadeOut(750);
+  console.log('this is our this:', this);
+  // 'this' is the event.target
 });
 
 $('#form').submit((e) => {
@@ -10,6 +12,6 @@ $('#form').submit((e) => {
 })
 
 
-$( document ).ready(function() {
-  console.log( "ready!" );
-});
+$().ready(
+  console.log( "ready!" )
+);
