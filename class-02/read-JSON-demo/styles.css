@@ -10,3 +10,7 @@ img {
 h1 {
   text-align: center;
 }
+
+#dog-template {
+  display: none;
+}
