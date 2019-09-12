@@ -1,32 +1,30 @@
 @media (min-width: 701px){
-  #header {
-    height: 100px;
-    line-height: 100px;
-    width: 100%;
+  div, header, footer{
+    background-color: #dedede;
+  }
+
+  body{
+    width: 960px;
+    margin: auto;
   }
 
   #left {
-    height: 800px;
-    line-height: 800px;
+    width: 200px;
     float: left;
-    width: 10%;
+    height: 500px;
   }
 
   #right {
-    height: 800px;
-    line-height: 800px;
+    width: 200px;
     float: right;
-    width: 10%;
+    height: 500px;
   }
 
   #main {
-    width: 80%;
-    height: 800px;
-    margin-left: 10%;
-    line-height: 800px;
+    height: 500px;
   }
 
-  #footer {
+  footer {
     clear: both;
   }
 }

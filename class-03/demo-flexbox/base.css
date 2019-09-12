@@ -1,9 +1,0 @@
-div, header, footer{
-  border: 2px solid black;
-  box-sizing: border-box;
-  background: lightblue;
-  color: black;
-  height: 200px;
-  line-height: 200px;
-  text-align: center;
-}

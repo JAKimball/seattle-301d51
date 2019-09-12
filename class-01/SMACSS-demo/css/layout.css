@@ -1,39 +1,26 @@
-body{
-  margin: auto;
+/* positions, structure, width, height*/
+
+body {
   width: 450px;
+  margin: auto;
 }
 
-div{
-  height: 200px;
+div {
   border: 2px solid black;
-  background: lightgray;
+  height: 200px;
+  margin-top: 10px;
+  width: 358px;
 }
 
-@media only screen and (min-width: 451px) and (max-width: 760px){
-
-  body{
-    margin: auto;
-    width: 760px;
+@media only screen and (min-width: 451px){
+  body {
+    width: 100%;
   }
-
-  div{
-    background: lightblue;
+  
+  div {
+    width: 400px;
     float: left;
-    margin: 20px;
-    width: 200px;
-  }
-}
-
-@media only screen and (min-width: 761px){
-  body{
-    width: 960px;
-  }
-
-  div{
-    background: lightcoral;
-    float: left;
-    margin: 10px;
-    width: 300px;
+    background-color: pink;
   }
 }
 
