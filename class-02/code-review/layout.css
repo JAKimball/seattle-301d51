@@ -60,6 +60,10 @@ div:nth-child(9){
     line-height: 250px
   }
 
+  a[href="google.com"] {
+    text-decoration: none;
+  }
+
   div:nth-child(9){
     height: 150px;
     width: 760px;
