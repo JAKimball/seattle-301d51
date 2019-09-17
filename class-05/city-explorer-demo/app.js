@@ -1,32 +1,35 @@
 'use strict';
 
-const weatherInstances = [];
+let allWeather = [];
 
-function Weather(day){
-  this.time = new Date(day.time).toUTCString();
-  this.forecast = day.summary;
-
-  weatherInstances.push(this);
+function Weather(dataObj){
+  this.time = new Date(dataObj.time).toUTCString();
+  this.forecast = dataObj.summary;
+  allWeather.push(this);
 }
 
-Weather.prototype.render = function(){
+Weather.prototype.dailyWeather = function(){
   let template = Handlebars.compile($('#weather-results-template').html());
   return template(this);
 }
 
-$.get('/city-weather-data.json')
-.then(ajaxResults => {
-  console.log('the ajax Resluts are:', ajaxResults);
+$(function(){
+  $.get('./city-weather-data.json', data => {
+    console.log(data);
+    data.data.forEach(day => {
+      new Weather(day);
+    })
 
-  ajaxResults.data.forEach(day => {
-    new Weather(day);
+    allWeather.forEach(instance => {
+      $('#weather-container').append(instance.dailyWeather());
+    })
   })
-  
-  renderWeather(weatherInstances);
 })
 
-function renderWeather(array){
-  array.forEach(day => {
-    $('#weather-container').append(day.render());
-  })
-}
+
+
+// handlebars wants: time and forecast
+// time: sat 12th at 10pm
+// forecast: partly sunny
+
+

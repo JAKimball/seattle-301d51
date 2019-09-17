@@ -2364,11 +2364,15 @@ input, select, textarea {
 
 /* Narrower */
 
-	#headerToggle {
+	/* #headerToggle {
 		display: none;
-	}
+	} */
 
 	@media screen and (max-width: 960px) {
+
+		#header .top {
+			display: block !important;
+		}
 
 		/* Basic */
 
@@ -2478,7 +2482,7 @@ input, select, textarea {
 					border: 0;
 				}
 
-					#headerToggle .toggle:before {
+					/* #headerToggle .toggle:before {
 						font-family: FontAwesome;
 						text-decoration: none;
 						font-style: normal;
@@ -2499,7 +2503,7 @@ input, select, textarea {
 						width: 3.25em;
 						height: 2.25em;
 						line-height: 2.25em;
-					}
+					} */
 
 			body.header-visible #main {
 				-moz-transform: translateX(275px);
