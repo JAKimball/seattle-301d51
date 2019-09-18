@@ -2370,7 +2370,7 @@ input, select, textarea {
 
 	@media screen and (max-width: 960px) {
 
-		#header .top {
+		#header {
 			display: block !important;
 		}
 
@@ -2562,7 +2562,11 @@ input, select, textarea {
 	@media screen and (max-width: 736px) {
 
 		/* Basic */
-
+		#header{
+			width: 20%;
+			display: block;
+		}
+		
 			body, input, textarea, select {
 				font-size: 14pt;
 			}
