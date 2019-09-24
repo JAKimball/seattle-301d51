@@ -10,16 +10,20 @@ let person = new Person('Fred', 51);
 
 // bad code -- references the same thing over and over
 function sayName(person) {
+  const fred = person.getName();
   if (person.age >= 50) {
-    return person.getName().toUpperCase();
+    return fred.toUpperCase();
   } else {
-    return person.getName().toLowerCase();
+    return fred.toLowerCase();
   }
 }
 
 // CHALLENGE: GET RID OF THE REPITION
 
-
+function sayName(person){
+  const fred = person.getName();
+  return (person.age >= 50) ? fred.toUpperCase() : fred.toLowerCase();
+}
 ///////////////////////////////////////////////////////////
 
 // This is a function that returns a promise
@@ -37,5 +41,27 @@ doSomethingAsync(person)
     differentData.name = differentData.name.toLowerCase();
     console.log('ugly lower', differentData.name);
   });
+
+doSomethingAsync(person)
+  .then( data => changeNameToUpper(data.name))
+  .then( differentData => changeNameToLower(differentData.name))
+  .then( name => print(name))
+
+function changeNameToUpper(name){
+  return name.toUpperCase();
+}
+
+function changeNameToLower(name){
+  return name.toLowerCase();
+}
+
+function print(words){
+  console.log('pretty', words);
+  return words;
+}
+
+
+
+
 
 // CHALLENGE: refactor this code to be better

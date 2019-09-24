@@ -5,7 +5,9 @@
     <h1>My Grocery List</h1>
     <p><a href="/">Home</a></p>
     <ul>
-      <li><%= item %></li>
+      <% arrayOfItems.forEach(item => { %>
+        <li><%= item %></li>
+      <% }) %>
 
     </ul>
     <!-- <ul>

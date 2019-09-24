@@ -1,5 +1,5 @@
 {
-  "name": "forms",
+  "name": "code-review",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -13,6 +13,8 @@
   "dependencies": {
     "cors": "2.8.5",
     "dotenv": "8.1.0",
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "pg": "7.12.1",
+    "superagent": "5.1.0"
   }
 }

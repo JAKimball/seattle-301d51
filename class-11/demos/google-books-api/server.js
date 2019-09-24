@@ -9,8 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Application Middleware
-app.use(express.urlencoded({extended:true}));
 app.use(express.static('./public'));
+app.use(express.urlencoded({extended:true}));
 
 // Set the view engine for server-side templating
 app.set('view engine', 'ejs');
@@ -20,7 +20,7 @@ app.set('view engine', 'ejs');
 app.get('/', newSearch);
 
 // Creates a new search to the Google Books API
-app.post('/searches', createSearch);
+app.post('/searches', searchForBooks);
 
 // Catch-all
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
@@ -28,38 +28,43 @@ app.get('*', (request, response) => response.status(404).send('This route does n
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
 // HELPER FUNCTIONS
-// Only show part of this to get students started
-function Book(info) {
-  const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
 
-  this.title = info.title || 'No title available';
-
-}
-
-// Note that .ejs file extension is not required
-function newSearch(request, response) {
+function newSearch(request, response){
+  console.log(request.body);
   response.render('pages/index');
 }
 
-// No API key required
-// Console.log request.body and request.body.search
-function createSearch(request, response) {
-  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-
-  console.log(request.body);
+function searchForBooks(request, response){
   console.log(request.body.search);
+  // response.send(request.body);
+  const searchName = request.body.search[0];
+  const searchingFor = request.body.search[1];
 
-  console.log(requst.body.search[0]);
-  const searchType = request.body.search[0];
-  
-  console.log(request.body.search[1]);
-  const serachingFor = request.body.search[1];
+  let url = `https://www.googleapis.com/books/v1/volumes?q=`;
 
-  if (serachingFor === 'title') { url += `+intitle:${searchType}`; }
-  if (serachingFor === 'author') { url += `+inauthor:${searchType}`; }
+  if(searchingFor === 'title'){
+    console.log('in first if')
+    url = url+`intitle:${searchName}`;
+  }
+
+  if(searchingFor === 'author'){
+    console.log('in second if')
+    url = url+`inauthor:${searchName}`;
+  }
 
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/searches/show', {searchResults: results}));
-  // how will we handle errors?
+    .then(superagentResults => {
+      console.log(superagentResults.body.items);
+      const library = superagentResults.body.items.map(book => {
+        return new Book(book);
+      })
+      response.send(library);
+    })
 }
+
+function Book(info){
+  const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
+  this.title = info.volumeInfo.title || 'no title available';
+}
+
+
