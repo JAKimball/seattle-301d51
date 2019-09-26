@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Results</title>
+  <% results.forEach(book => { %>
+    <h2><%= book.title %></h2>
+    <p><%= book.author %></p>
+    <img src=<%= book.image_url %>/>
+    <p><%= book.description %></p>
+  <% }) %>
 </head>
 <body>
   

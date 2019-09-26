@@ -36,19 +36,16 @@ function newSearch(request, response){
 
 function searchForBooks(request, response){
   console.log(request.body.search);
-  // response.send(request.body);
   const searchName = request.body.search[0];
   const searchingFor = request.body.search[1];
 
   let url = `https://www.googleapis.com/books/v1/volumes?q=`;
 
   if(searchingFor === 'title'){
-    console.log('in first if')
     url = url+`intitle:${searchName}`;
   }
 
   if(searchingFor === 'author'){
-    console.log('in second if')
     url = url+`inauthor:${searchName}`;
   }
 
@@ -56,15 +53,21 @@ function searchForBooks(request, response){
     .then(superagentResults => {
       console.log(superagentResults.body.items);
       const library = superagentResults.body.items.map(book => {
-        return new Book(book);
+        return new Book(book.volumeInfo);
       })
-      response.send(library);
+      response.render('pages/searches/show.ejs', {results: library});
     })
 }
 
-function Book(info){
+function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  this.title = info.volumeInfo.title || 'no title available';
+
+  this.title = info.title ? info.title : 'No title available';
+  this.author = info.authors ? info.authors[0] : 'No author available';
+  this.isbn = info.industryIdentifiers ? `ISBN_13 ${info.industryIdentifiers[0].identifier}` : 'No ISBN available';
+  this.image_url = info.imageLinks ? info.imageLinks.smallThumbnail : placeholderImage;
+  this.description = info.description ? info.description : 'No description available';
+  this.id = info.industryIdentifiers ? `${info.industryIdentifiers[0].identifier}` : '';
 }
 
 

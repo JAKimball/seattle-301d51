@@ -1,4 +1,7 @@
+DROP DATABASE task_app;
+CREATE DATABASE task_app; 
 
+\c task_app;
 
 DROP TABLE IF EXISTS tasks;
 CREATE TABLE tasks (
